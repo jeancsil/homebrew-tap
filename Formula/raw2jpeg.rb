@@ -84,12 +84,22 @@ class Raw2jpeg < Formula
     chmod 0755, app/"Contents/MacOS/raw2jpeg"
   end
 
+  def post_install
+    # Formula#install runs sandboxed and can't write outside the prefix;
+    # post_install isn't sandboxed, so this is where /Applications is
+    # reachable. A symlink (not a copy) so `brew upgrade` repoints it at
+    # the new version automatically, the same way opt_prefix already does.
+    system "ln", "-sfn", opt_prefix/"raw2jpeg.app", "/Applications/raw2jpeg.app"
+  end
+
   def caveats
     <<~EOS
-      raw2jpeg.app was assembled but not installed, since formulae may not
-      write outside their prefix. Copy it into /Applications yourself:
+      raw2jpeg.app is symlinked into /Applications automatically.
 
-        cp -R "#{opt_prefix}/raw2jpeg.app" /Applications/
+      `brew uninstall` won't remove that symlink (Homebrew doesn't track
+      files placed outside its prefix) — delete it yourself if you uninstall:
+
+        rm /Applications/raw2jpeg.app
     EOS
   end
 
