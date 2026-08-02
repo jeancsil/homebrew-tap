@@ -3,6 +3,9 @@ class Raw2jpeg < Formula
 
   desc "Convert RAW photos to shareable JPEGs via macOS sips or Core Image"
   homepage "https://github.com/jeancsil/raw2jpeg"
+  # NOTE: `main` doesn't yet include this feature branch's commits
+  # (pyproject.toml, packaging/, tools/, raw2jpeg package) — `brew install`
+  # will fail with this url until jeancsil/raw2jpeg's public main catches up.
   url "https://github.com/jeancsil/raw2jpeg.git", branch: "main"
   version "1.0.0"
   license "MIT"
