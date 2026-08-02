@@ -3,10 +3,8 @@ class Raw2jpeg < Formula
 
   desc "Convert RAW photos to shareable JPEGs via macOS sips or Core Image"
   homepage "https://github.com/jeancsil/raw2jpeg"
-  # NOTE: `main` doesn't yet include this feature branch's commits
-  # (pyproject.toml, packaging/, tools/, raw2jpeg package) — `brew install`
-  # will fail with this url until jeancsil/raw2jpeg's public main catches up.
-  url "https://github.com/jeancsil/raw2jpeg.git", branch: "main"
+  url "https://github.com/jeancsil/raw2jpeg.git", tag:      "v1.0.0",
+                                                   revision: "87f896d57b90fbb5acbdaeac86c263d3fc5801f5"
   version "1.0.0"
   license "MIT"
 
@@ -79,7 +77,9 @@ class Raw2jpeg < Formula
     cp "packaging/Info.plist", app/"Contents/Info.plist"
     cp buildpath/"build/icon.icns", app/"Contents/Resources/icon.icns"
     (app/"Contents/MacOS/raw2jpeg").write(
-      (buildpath/"packaging/launcher.sh").read.gsub("@PYTHON@", (libexec/"bin/python").to_s),
+      (buildpath/"packaging/launcher.sh").read
+        .gsub("@PYTHON@", (libexec/"bin/python").to_s)
+        .gsub("@GPU_HELPER@", (bin/"raw2jpeg-gpu").to_s),
     )
     chmod 0755, app/"Contents/MacOS/raw2jpeg"
   end
