@@ -3,9 +3,9 @@ class Raw2jpeg < Formula
 
   desc "Convert RAW photos to shareable JPEGs via macOS sips or Core Image"
   homepage "https://github.com/jeancsil/raw2jpeg"
-  url "https://github.com/jeancsil/raw2jpeg.git", tag:      "v1.0.0",
-                                                   revision: "87f896d57b90fbb5acbdaeac86c263d3fc5801f5"
-  version "1.0.0"
+  url "https://github.com/jeancsil/raw2jpeg.git", tag:      "v1.0.1",
+                                                   revision: "74de6c01a5efb123cd542b58aacd3bdd8408788a"
+  version "1.0.1"
   license "MIT"
 
   depends_on :macos
